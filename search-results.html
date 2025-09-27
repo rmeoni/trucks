@@ -1,336 +1,402 @@
 <!-- search-results.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Logistics Hub - Search Results</title>
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#1173d4",
-            "background-light": "#f6f7f8",
-            "background-dark": "#101922",
-            "foreground-light": "#101922",
-            "foreground-dark": "#f6f7f8",
-            "card-light": "#ffffff",
-            "card-dark": "#182431",
-            "muted-light": "#6b7280",
-            "muted-dark": "#9ca3af",
-            "border-light": "#e5e7eb",
-            "border-dark": "#374151"
-          },
-          fontFamily: { "display": ["Work Sans","sans-serif"] },
-          borderRadius: { "DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px" },
-        },
-      },
-    }
-  </script>
-  <style>
-    .material-symbols-outlined{
-      font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24
-    }
-    .chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;border:1px solid rgba(0,0,0,.08);padding:.15rem .5rem;border-radius:999px}
-    .chip.ok{background:#d1fae5}
-    .chip.warn{background:#fef3c7}
-    .chip.err{background:#fee2e2}
-    dialog::backdrop{background:rgba(0,0,0,.35)}
-  </style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Logistics Hub - Search Results</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#101922",
+                        "foreground-dark": "#f6f7f8",
+                        "card-light": "#ffffff",
+                        "card-dark": "#182431",
+                        "muted-light": "#6b7280",
+                        "muted-dark": "#9ca3af",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151"
+                    },
+                    fontFamily: { "display": ["Work Sans", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .75rem;
+            border: 1px solid rgba(0, 0, 0, .08);
+            padding: .15rem .5rem;
+            border-radius: 999px
+        }
+
+        .chip.ok {
+            background: #d1fae5
+        }
+
+        .chip.warn {
+            background: #fef3c7
+        }
+
+        .chip.err {
+            background: #fee2e2
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, .35)
+        }
+    </style>
 </head>
 
 <body class="bg-background-light dark:bg-background-dark font-display text-foreground-light dark:text-foreground-dark">
-  <div class="flex flex-col min-h-screen">
-    <!-- Header -->
-    <header class="sticky top-0 z-10 bg-card-light/80 dark:bg-card-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center space-x-8">
-            <a class="flex items-center space-x-2" href="index.html" aria-label="Back to home">
-              <div class="w-8 h-8 text-primary">
-                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"/></svg>
-              </div>
-              <span class="text-xl font-bold">Logistics Hub</span>
-            </a>
-            <nav class="hidden md:flex items-center space-x-6">
-              <span class="text-sm font-medium">Shipments</span>
-              <span class="text-sm font-medium">Customers</span>
-              <span class="text-sm font-medium">Reports</span>
-            </nav>
-          </div>
-          <div class="flex items-center gap-2">
-            <div id="statusBar" class="hidden md:flex items-center gap-2"></div>
-            <button id="openSettings" class="p-2 rounded-full hover:bg-primary/10" title="Settings">
-              <span class="material-symbols-outlined">settings</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main -->
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
-      <div class="flex flex-col lg:flex-row gap-8">
-        <!-- Sidebar -->
-        <aside class="w-full lg:w-64 xl:w-72 flex-shrink-0">
-          <div class="sticky top-24">
-            <div class="bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark p-6">
-              <div class="flex items-center justify-between mb-6">
-                <h2 class="text-lg font-semibold">Filters</h2>
-                <button id="clearFilters" class="text-sm font-medium text-primary hover:underline">Clear all</button>
-              </div>
-              <div class="space-y-6">
-                <div>
-                  <label class="text-sm font-medium text-muted-light dark:text-muted-dark" for="status">Shipment Status</label>
-                  <select id="fltStatus" class="mt-2 w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
-                    <option value="">All Statuses</option>
-                    <option>In Transit</option>
-                    <option>Delivered</option>
-                    <option>Out for Delivery</option>
-                    <option>Processing</option>
-                    <option>Pending</option>
-                  </select>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-10 bg-card-light/80 dark:bg-card-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a class="flex items-center space-x-2" href="index.html" aria-label="Back to home">
+                            <div class="w-8 h-8 text-primary">
+                                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </div>
+                            <span class="text-xl font-bold">Logistics Hub</span>
+                        </a>
+                        <nav class="hidden md:flex items-center space-x-6">
+                            <span class="text-sm font-medium">Shipments</span>
+                            <span class="text-sm font-medium">Customers</span>
+                            <span class="text-sm font-medium">Reports</span>
+                        </nav>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div id="statusBar" class="hidden md:flex items-center gap-2"></div>
+                        <button id="openSettings" class="p-2 rounded-full hover:bg-primary/10" title="Settings">
+                            <span class="material-symbols-outlined">settings</span>
+                        </button>
+                    </div>
                 </div>
-                <div>
-                  <label class="text-sm font-medium text-muted-light dark:text-muted-dark" for="origin">Origin</label>
-                  <input id="fltOrigin" class="mt-2 w-full pl-4 pr-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="e.g., New York, NY" type="text" />
-                </div>
-                <div>
-                  <label class="text-sm font-medium text-muted-light dark:text-muted-dark" for="destination">Destination</label>
-                  <input id="fltDestination" class="mt-2 w-full pl-4 pr-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="e.g., Los Angeles, CA" type="text" />
-                </div>
-                <div>
-                  <h3 class="text-sm font-medium text-muted-light dark:text-muted-dark mb-2">Source Channel</h3>
-                  <div class="space-y-2">
-                    <label class="flex items-center gap-3">
-                      <input id="srcTruckload" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" checked />
-                      <span class="text-sm">Truckload</span>
-                    </label>
-                    <label class="flex items-center gap-3">
-                      <input id="srcBatz" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" checked />
-                      <span class="text-sm">Batz CRM</span>
-                    </label>
-                  </div>
-                </div>
-                <button id="applyFilters" class="w-full bg-primary text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors">Apply Filters</button>
-              </div>
             </div>
-          </div>
-        </aside>
+        </header>
 
-        <!-- Results -->
-        <div class="flex-grow">
-          <div class="relative mb-8">
-            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-muted-light dark:text-muted-dark text-2xl">search</span>
-            <input id="qInput" class="w-full pl-14 pr-12 py-4 text-lg rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="Enter your tracking number..." type="text" />
-            <button id="clearQuery" class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full text-muted-light dark:text-muted-dark hover:text-foreground-light dark:hover:text-foreground-dark hover:bg-primary/10 transition-colors" title="Clear">
-              <span class="material-symbols-outlined">close</span>
-            </button>
-          </div>
+        <!-- Main -->
+        <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar -->
+                <aside class="w-full lg:w-64 xl:w-72 flex-shrink-0">
+                    <div class="sticky top-24">
+                        <div
+                            class="bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="text-lg font-semibold">Filters</h2>
+                                <button id="clearFilters" class="text-sm font-medium text-primary hover:underline">Clear
+                                    all</button>
+                            </div>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="text-sm font-medium text-muted-light dark:text-muted-dark"
+                                        for="status">Shipment Status</label>
+                                    <select id="fltStatus"
+                                        class="mt-2 w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                                        <option value="">All Statuses</option>
+                                        <option>In Transit</option>
+                                        <option>Delivered</option>
+                                        <option>Out for Delivery</option>
+                                        <option>Processing</option>
+                                        <option>Pending</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium text-muted-light dark:text-muted-dark"
+                                        for="origin">Origin</label>
+                                    <input id="fltOrigin"
+                                        class="mt-2 w-full pl-4 pr-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                                        placeholder="e.g., New York, NY" type="text" />
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium text-muted-light dark:text-muted-dark"
+                                        for="destination">Destination</label>
+                                    <input id="fltDestination"
+                                        class="mt-2 w-full pl-4 pr-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                                        placeholder="e.g., Los Angeles, CA" type="text" />
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-medium text-muted-light dark:text-muted-dark mb-2">Source
+                                        Channel</h3>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center gap-3">
+                                            <input id="srcTruckload" type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                                                checked />
+                                            <span class="text-sm">Truckload</span>
+                                        </label>
+                                        <label class="flex items-center gap-3">
+                                            <input id="srcBatz" type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                                                checked />
+                                            <span class="text-sm">Batz CRM</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button id="applyFilters"
+                                    class="w-full bg-primary text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors">Apply
+                                    Filters</button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
 
-          <div class="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
-            <div class="flex items-center gap-4">
-              <h1 class="text-2xl font-bold">Search Results</h1>
-              <span id="resultCount" class="text-sm text-muted-light dark:text-muted-dark">0 results</span>
+                <!-- Results -->
+                <div class="flex-grow">
+                    <div class="relative mb-8">
+                        <span
+                            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-muted-light dark:text-muted-dark text-2xl">search</span>
+                        <input id="qInput"
+                            class="w-full pl-14 pr-12 py-4 text-lg rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                            placeholder="Enter your tracking number..." type="text" />
+                        <button id="clearQuery"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full text-muted-light dark:text-muted-dark hover:text-foreground-light dark:hover:text-foreground-dark hover:bg-primary/10 transition-colors"
+                            title="Clear">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
+                        <div class="flex items-center gap-4">
+                            <h1 class="text-2xl font-bold">Search Results</h1>
+                            <span id="resultCount" class="text-sm text-muted-light dark:text-muted-dark">0
+                                results</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="text-sm font-medium text-muted-light dark:text-muted-dark" for="sortBy">Sort
+                                By:</label>
+                            <select id="sortBy"
+                                class="w-auto rounded-lg border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-sm py-1.5 pl-3 pr-8">
+                                <option value="etaAsc">Est. Delivery (Soonest)</option>
+                                <option value="etaDesc">Est. Delivery (Furthest)</option>
+                                <option value="idAsc">Tracking Number (A–Z)</option>
+                                <option value="status">Status</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="results" class="space-y-6"></div>
+                </div>
             </div>
-            <div class="flex items-center gap-2">
-              <label class="text-sm font-medium text-muted-light dark:text-muted-dark" for="sortBy">Sort By:</label>
-              <select id="sortBy" class="w-auto rounded-lg border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-sm py-1.5 pl-3 pr-8">
-                <option value="etaAsc">Est. Delivery (Soonest)</option>
-                <option value="etaDesc">Est. Delivery (Furthest)</option>
-                <option value="idAsc">Tracking Number (A–Z)</option>
-                <option value="status">Status</option>
-              </select>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <dialog id="settingsDlg"
+        class="rounded-xl w-[min(680px,92vw)] bg-card-light dark:bg-card-dark text-foreground-light dark:text-foreground-dark p-0 border border-border-light dark:border-border-dark">
+        <form method="dialog">
+            <div
+                class="px-6 pt-5 pb-3 border-b border-border-light dark:border-border-dark flex items-center justify-between">
+                <h3 class="text-lg font-semibold">Sandbox Settings</h3>
+                <button class="p-2 rounded hover:bg-primary/10" aria-label="Close"><span
+                        class="material-symbols-outlined">close</span></button>
             </div>
-          </div>
-
-          <div id="results" class="space-y-6"></div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <!-- Settings Modal -->
-  <dialog id="settingsDlg" class="rounded-xl w-[min(680px,92vw)] bg-card-light dark:bg-card-dark text-foreground-light dark:text-foreground-dark p-0 border border-border-light dark:border-border-dark">
-    <form method="dialog">
-      <div class="px-6 pt-5 pb-3 border-b border-border-light dark:border-border-dark flex items-center justify-between">
-        <h3 class="text-lg font-semibold">Sandbox Settings</h3>
-        <button class="p-2 rounded hover:bg-primary/10" aria-label="Close"><span class="material-symbols-outlined">close</span></button>
-      </div>
-    </form>
-
-    <div class="p-6 grid gap-4 md:grid-cols-2">
+        </form>
+        <div class="p-6 grid gap-4 md:grid-cols-2">
+            <!-- Warning about CORS proxy
       <div class="md:col-span-2">
         <p class="text-sm text-muted-light dark:text-muted-dark">
           GitHub Pages is static hosting. If your sandbox APIs don’t allow your Pages origin via CORS,
           calls will be blocked. Add an <strong>Optional CORS Proxy</strong> if needed (e.g., a small Cloudflare Worker that forwards requests and sets permissive CORS).
         </p>
       </div>
+       -->
 
-      <label class="grid gap-1">
-        <span class="text-sm font-medium">Truckload Sandbox Base URL</span>
-        <input id="cfg_tlBase" type="url" placeholder="https://sandbox.truckload.example/api" class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2"/>
-      </label>
+            <label class="grid gap-1">
+                <span class="text-sm font-medium">Truckload Sandbox Base URL</span>
+                <input id="cfg_tlBase" type="url" placeholder="https://sandbox.truckload.example/api"
+                    class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2" />
+            </label>
 
-      <label class="grid gap-1">
-        <span class="text-sm font-medium">Truckload API Key (Bearer or raw)</span>
-        <input id="cfg_tlKey" type="password" placeholder="••••" class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2"/>
-      </label>
+            <label class="grid gap-1">
+                <span class="text-sm font-medium">Truckload API Key (Bearer or raw)</span>
+                <input id="cfg_tlKey" type="password" placeholder="••••"
+                    class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2" />
+            </label>
 
-      <label class="grid gap-1">
-        <span class="text-sm font-medium">Batz CRM Sandbox Base URL</span>
-        <input id="cfg_batsBase" type="url" placeholder="https://sandbox.api.batscrm.com/v1" class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2"/>
-      </label>
+            <label class="grid gap-1">
+                <span class="text-sm font-medium">Batz CRM Sandbox Base URL</span>
+                <input id="cfg_batsBase" type="url" placeholder="https://sandbox.api.batscrm.com/v1"
+                    class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2" />
+            </label>
 
-      <label class="grid gap-1">
-        <span class="text-sm font-medium">Batz CRM API Key (Bearer or raw)</span>
-        <input id="cfg_batsKey" type="password" placeholder="••••" class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2"/>
-      </label>
+            <label class="grid gap-1">
+                <span class="text-sm font-medium">Batz CRM API Key (Bearer or raw)</span>
+                <input id="cfg_batsKey" type="password" placeholder="••••"
+                    class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2" />
+            </label>
 
-      <label class="md:col-span-2 grid gap-1">
-        <span class="text-sm font-medium">Optional CORS Proxy</span>
-        <input id="cfg_proxy" type="url" placeholder="https://your-worker.example.workers.dev" class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2"/>
-        <span class="text-xs text-muted-light dark:text-muted-dark">Proxy should accept <code>?u=&lt;encoded-target-url&gt;</code> and forward with permissive CORS.</span>
-      </label>
+            <label class="md:col-span-2 grid gap-1">
+                <span class="text-sm font-medium">Optional CORS Proxy</span>
+                <input id="cfg_proxy" type="url" placeholder="https://your-worker.example.workers.dev"
+                    class="rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-2" />
+                <span class="text-xs text-muted-light dark:text-muted-dark">Proxy should accept
+                    <code>?u=&lt;encoded-target-url&gt;</code> and forward with permissive CORS.</span>
+            </label>
 
-      <label class="flex items-center gap-2 md:col-span-2">
-        <input id="cfg_mock" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary">
-        <span class="text-sm">Use Mock Data (no API calls)</span>
-      </label>
-    </div>
+            <label class="flex items-center gap-2 md:col-span-2">
+                <input id="cfg_mock" type="checkbox"
+                    class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary">
+                <span class="text-sm">Use Mock Data (no API calls)</span>
+            </label>
+        </div>
 
-    <div class="p-4 flex justify-end gap-2 border-t border-border-light dark:border-border-dark">
-      <button id="btnClearCfg" class="px-3 py-2 rounded-lg border hover:bg-background-light/60 dark:hover:bg-background-dark/60">Clear</button>
-      <button id="btnSaveCfg" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90">Save</button>
-    </div>
-  </dialog>
+        <div class="p-4 flex justify-end gap-2 border-t border-border-light dark:border-border-dark">
+            <button id="btnClearCfg"
+                class="px-3 py-2 rounded-lg border hover:bg-background-light/60 dark:hover:bg-background-dark/60">Clear</button>
+            <button id="btnSaveCfg"
+                class="px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90">Save</button>
+        </div>
+    </dialog>
 
-  <script>
-    // ---------- Config (localStorage) ----------
-    const LS_KEY = 'lhub_cfg_v1';
-    const readCfg = () => {
-      try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
-    };
-    const writeCfg = (obj) => localStorage.setItem(LS_KEY, JSON.stringify(obj));
-    const getCfg = () => {
-      const c = readCfg();
-      return {
-        tlBase: (c.tlBase || '').trim(),
-        tlKey: (c.tlKey || '').trim(),
-        batsBase: (c.batsBase || '').trim(),
-        batsKey: (c.batsKey || '').trim(),
-        proxy: (c.proxy || '').trim(),
-        mock: !!c.mock,
-      };
-    };
+    <script>
+        // ---------- Config (localStorage) ----------
+        const LS_KEY = 'lhub_cfg_v1';
+        const readCfg = () => {
+            try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
+        };
+        const writeCfg = (obj) => localStorage.setItem(LS_KEY, JSON.stringify(obj));
+        const getCfg = () => {
+            const c = readCfg();
+            return {
+                tlBase: (c.tlBase || '').trim(),
+                tlKey: (c.tlKey || '').trim(),
+                batsBase: (c.batsBase || '').trim(),
+                batsKey: (c.batsKey || '').trim(),
+                proxy: (c.proxy || '').trim(),
+                mock: !!c.mock,
+            };
+        };
 
-    // ---------- DOM ----------
-    const qs = (sel, el=document) => el.querySelector(sel);
-    const qsa = (sel, el=document) => [...el.querySelectorAll(sel)];
-    const statusBar = qs('#statusBar');
-    const resultsEl = qs('#results');
-    const resultCountEl = qs('#resultCount');
-    const qInput = qs('#qInput');
+        // ---------- DOM ----------
+        const qs = (sel, el = document) => el.querySelector(sel);
+        const qsa = (sel, el = document) => [...el.querySelectorAll(sel)];
+        const statusBar = qs('#statusBar');
+        const resultsEl = qs('#results');
+        const resultCountEl = qs('#resultCount');
+        const qInput = qs('#qInput');
 
-    // Filters
-    const fltStatus = qs('#fltStatus');
-    const fltOrigin = qs('#fltOrigin');
-    const fltDestination = qs('#fltDestination');
-    const srcTruckload = qs('#srcTruckload');
-    const srcBatz = qs('#srcBatz');
+        // Filters
+        const fltStatus = qs('#fltStatus');
+        const fltOrigin = qs('#fltOrigin');
+        const fltDestination = qs('#fltDestination');
+        const srcTruckload = qs('#srcTruckload');
+        const srcBatz = qs('#srcBatz');
 
-    // Settings
-    const settingsDlg = qs('#settingsDlg');
-    const openSettings = qs('#openSettings');
-    const cfg_tlBase = qs('#cfg_tlBase');
-    const cfg_tlKey = qs('#cfg_tlKey');
-    const cfg_batsBase = qs('#cfg_batsBase');
-    const cfg_batsKey = qs('#cfg_batsKey');
-    const cfg_proxy = qs('#cfg_proxy');
-    const cfg_mock = qs('#cfg_mock');
-    const btnSaveCfg = qs('#btnSaveCfg');
-    const btnClearCfg = qs('#btnClearCfg');
+        // Settings
+        const settingsDlg = qs('#settingsDlg');
+        const openSettings = qs('#openSettings');
+        const cfg_tlBase = qs('#cfg_tlBase');
+        const cfg_tlKey = qs('#cfg_tlKey');
+        const cfg_batsBase = qs('#cfg_batsBase');
+        const cfg_batsKey = qs('#cfg_batsKey');
+        const cfg_proxy = qs('#cfg_proxy');
+        const cfg_mock = qs('#cfg_mock');
+        const btnSaveCfg = qs('#btnSaveCfg');
+        const btnClearCfg = qs('#btnClearCfg');
 
-    // ---------- Helpers ----------
-    const getParam = (k) => new URLSearchParams(location.search).get(k) || '';
-    const withProxy = (url, proxy) => proxy ? proxy.replace(/\/$/, '') + '/?u=' + encodeURIComponent(url) : url;
-    const asBearer = (key) => !key ? '' : (key.startsWith('Bearer ') ? key : 'Bearer ' + key);
+        // ---------- Helpers ----------
+        const getParam = (k) => new URLSearchParams(location.search).get(k) || '';
+        const withProxy = (url, proxy) => proxy ? proxy.replace(/\/$/, '') + '/?u=' + encodeURIComponent(url) : url;
+        const asBearer = (key) => !key ? '' : (key.startsWith('Bearer ') ? key : 'Bearer ' + key);
 
-    function chip(text, kind='ok'){
-      const span = document.createElement('span');
-      span.className = 'chip ' + kind;
-      span.textContent = text;
-      return span;
-    }
+        function chip(text, kind = 'ok') {
+            const span = document.createElement('span');
+            span.className = 'chip ' + kind;
+            span.textContent = text;
+            return span;
+        }
 
-    function setStatus(chips){
-      statusBar.classList.remove('hidden');
-      statusBar.replaceChildren(...chips);
-    }
+        function setStatus(chips) {
+            statusBar.classList.remove('hidden');
+            statusBar.replaceChildren(...chips);
+        }
 
-    function parseDateMaybe(s){
-      const d = new Date(s);
-      return isNaN(d) ? null : d;
-    }
+        function parseDateMaybe(s) {
+            const d = new Date(s);
+            return isNaN(d) ? null : d;
+        }
 
-    function normalizeItems(source, data){
-      // Shape the response into a common card structure
-      // Adjust this mapping to the real sandbox payloads.
-      const items = [];
+        function normalizeItems(source, data) {
+            // Shape the response into a common card structure
+            // Adjust this mapping to the real sandbox payloads.
+            const items = [];
 
-      if (source === 'Truckload'){
-        // Expecting something like { shipments: [{id,status,origin,destination,eta}, ...] }
-        const list = (data && data.shipments) || [];
-        list.forEach(x => items.push({
-          source,
-          id: x.id || x.tracking || 'TL-NA',
-          status: x.status || '—',
-          origin: x.origin || x.from || '—',
-          destination: x.destination || x.to || '—',
-          eta: x.eta || x.estimatedDelivery || null,
-        }));
-      } else if (source === 'Batz CRM'){
-        // Expecting something like { shipments/customers/... } – for POC show as shipments-like
-        const list = (data && data.shipments) || (data && data.results) || [];
-        list.forEach(x => items.push({
-          source,
-          id: x.id || x.code || 'BZ-NA',
-          status: x.status || x.stage || '—',
-          origin: x.origin || x.from || '—',
-          destination: x.destination || x.to || '—',
-          eta: x.eta || x.estimatedDelivery || null,
-        }));
-      }
-      return items;
-    }
+            if (source === 'Truckload') {
+                // Expecting something like { shipments: [{id,status,origin,destination,eta}, ...] }
+                const list = (data && data.shipments) || [];
+                list.forEach(x => items.push({
+                    source,
+                    id: x.id || x.tracking || 'TL-NA',
+                    status: x.status || '—',
+                    origin: x.origin || x.from || '—',
+                    destination: x.destination || x.to || '—',
+                    eta: x.eta || x.estimatedDelivery || null,
+                }));
+            } else if (source === 'Batz CRM') {
+                // Expecting something like { shipments/customers/... } – for POC show as shipments-like
+                const list = (data && data.shipments) || (data && data.results) || [];
+                list.forEach(x => items.push({
+                    source,
+                    id: x.id || x.code || 'BZ-NA',
+                    status: x.status || x.stage || '—',
+                    origin: x.origin || x.from || '—',
+                    destination: x.destination || x.to || '—',
+                    eta: x.eta || x.estimatedDelivery || null,
+                }));
+            }
+            return items;
+        }
 
-    function renderCards(items){
-      resultCountEl.textContent = items.length + (items.length === 1 ? ' result' : ' results');
-      resultsEl.replaceChildren();
+        function renderCards(items) {
+            resultCountEl.textContent = items.length + (items.length === 1 ? ' result' : ' results');
+            resultsEl.replaceChildren();
 
-      if (!items.length){
-        const empty = document.createElement('div');
-        empty.className = 'text-sm text-muted-light dark:text-muted-dark';
-        empty.textContent = 'No results yet.';
-        resultsEl.appendChild(empty);
-        return;
-      }
+            if (!items.length) {
+                const empty = document.createElement('div');
+                empty.className = 'text-sm text-muted-light dark:text-muted-dark';
+                empty.textContent = 'No results yet.';
+                resultsEl.appendChild(empty);
+                return;
+            }
 
-      items.forEach(it => {
-        const card = document.createElement('div');
-        card.className = 'bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm hover:shadow-lg hover:border-primary/50 transition-all duration-300';
+            items.forEach(it => {
+                const card = document.createElement('div');
+                card.className = 'bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm hover:shadow-lg hover:border-primary/50 transition-all duration-300';
 
-        const badgeColor = it.source === 'Truckload' ? 'bg-primary/10 text-primary' : 'bg-indigo-500/10 text-indigo-500';
-        const etaText = it.eta ? (new Date(it.eta)).toLocaleDateString() : '—';
+                const badgeColor = it.source === 'Truckload' ? 'bg-primary/10 text-primary' : 'bg-indigo-500/10 text-indigo-500';
+                const etaText = it.eta ? (new Date(it.eta)).toLocaleDateString() : '—';
 
-        card.innerHTML = `
+                card.innerHTML = `
           <div class="flex flex-col sm:flex-row justify-between gap-6">
             <div class="flex-grow">
               <div class="flex items-center gap-3 mb-3">
@@ -355,197 +421,202 @@
             </div>
           </div>
         `;
-        resultsEl.appendChild(card);
-      });
-    }
-
-    function applyFiltersTo(items){
-      return items.filter(it => {
-        if (fltStatus.value && (it.status || '').toLowerCase() !== fltStatus.value.toLowerCase()) return false;
-        if (fltOrigin.value && !(it.origin || '').toLowerCase().includes(fltOrigin.value.toLowerCase())) return false;
-        if (fltDestination.value && !(it.destination || '').toLowerCase().includes(fltDestination.value.toLowerCase())) return false;
-        return true;
-      });
-    }
-
-    function sortItems(items, mode){
-      const copy = items.slice();
-      if (mode === 'etaAsc'){
-        copy.sort((a,b)=> (parseDateMaybe(a.eta)?.getTime()||Infinity) - (parseDateMaybe(b.eta)?.getTime()||Infinity));
-      } else if (mode === 'etaDesc'){
-        copy.sort((a,b)=> (parseDateMaybe(b.eta)?.getTime()||-Infinity) - (parseDateMaybe(a.eta)?.getTime()||-Infinity));
-      } else if (mode === 'idAsc'){
-        copy.sort((a,b)=> String(a.id).localeCompare(String(b.id)));
-      } else if (mode === 'status'){
-        copy.sort((a,b)=> String(a.status).localeCompare(String(b.status)));
-      }
-      return copy;
-    }
-
-    // ---------- Mock data ----------
-    function mockTruckload(q){
-      return { shipments: [
-        { id:'TL-1001', status:'In Transit', origin:'New York, NY', destination:'Los Angeles, CA', eta: new Date(Date.now()+3*86400000).toISOString() },
-        { id:'TL-1002', status:'Out for Delivery', origin:'Houston, TX', destination:'Seattle, WA', eta: new Date(Date.now()+1*86400000).toISOString() },
-      ]};
-    }
-    function mockBatz(q){
-      return { shipments: [
-        { id:'BZ-12345', status:'Delivered', origin:'Chicago, IL', destination:'Miami, FL', eta: new Date(Date.now()-1*86400000).toISOString() },
-        { id:'BZ-98765', status:'Processing', origin:'Atlanta, GA', destination:'Denver, CO', eta: new Date(Date.now()+4*86400000).toISOString() },
-      ]};
-    }
-
-    // ---------- Fetchers (adjust endpoints to your sandbox) ----------
-    async function fetchTruckload(base, key, q, proxy){
-      // Example: GET {base}/search?query=...
-      const url = new URL(base.replace(/\/$/,'') + '/search');
-      url.searchParams.set('query', q);
-      const target = withProxy(url.toString(), proxy);
-      const headers = new Headers({ 'Accept':'application/json' });
-      if (key) headers.set('Authorization', asBearer(key));
-      const t0 = performance.now();
-      const res = await fetch(target, { headers, mode:'cors' });
-      const t1 = performance.now();
-      if (!res.ok) throw new Error('Truckload HTTP ' + res.status);
-      const data = await res.json();
-      data._elapsed_ms = Math.round(t1 - t0);
-      return data;
-    }
-
-    async function fetchBatz(base, key, q, proxy){
-      // Example: GET {base}/search?q=...
-      const url = new URL(base.replace(/\/$/,'') + '/search');
-      url.searchParams.set('q', q);
-      const target = withProxy(url.toString(), proxy);
-      const headers = new Headers({ 'Accept':'application/json' });
-      if (key) headers.set('Authorization', asBearer(key));
-      const t0 = performance.now();
-      const res = await fetch(target, { headers, mode:'cors' });
-      const t1 = performance.now();
-      if (!res.ok) throw new Error('Batz HTTP ' + res.status);
-      const data = await res.json();
-      data._elapsed_ms = Math.round(t1 - t0);
-      return data;
-    }
-
-    // ---------- Orchestration ----------
-    let allItems = []; // normalized, combined
-
-    async function runSearch(){
-      const cfg = getCfg();
-      const query = (qInput.value || '').trim();
-      if (!query) { renderCards([]); setStatus([chip('Enter a query','warn')]); return; }
-
-      // Which sources
-      const wantsTL = srcTruckload.checked;
-      const wantsBATS = srcBatz.checked;
-
-      // Status chips
-      const chips = [];
-      if (cfg.mock) {
-        chips.push(chip('Mock Mode','ok'));
-      } else if (cfg.proxy) {
-        chips.push(chip('Proxy','warn'));
-      } else {
-        chips.push(chip('Direct','warn')); // unknown CORS
-      }
-      setStatus(chips);
-
-      // Fetch
-      try {
-        let tlData = null, bzData = null;
-
-        if (cfg.mock) {
-          if (wantsTL) tlData = mockTruckload(query);
-          if (wantsBATS) bzData = mockBatz(query);
-        } else {
-          const tasks = [];
-          if (wantsTL) tasks.push(fetchTruckload(cfg.tlBase, cfg.tlKey, query, cfg.proxy).then(d=>{ tlData=d; chips.push(chip(`Truckload ${d._elapsed_ms}ms`,'ok')); }).catch(e=>{ chips.push(chip('Truckload error','err')); console.error(e); }));
-          if (wantsBATS) tasks.push(fetchBatz(cfg.batsBase, cfg.batsKey, query, cfg.proxy).then(d=>{ bzData=d; chips.push(chip(`Batz ${d._elapsed_ms}ms`,'ok')); }).catch(e=>{ chips.push(chip('Batz error','err')); console.error(e); }));
-          await Promise.all(tasks);
-          setStatus(chips);
+                resultsEl.appendChild(card);
+            });
         }
 
-        const combined = [];
-        if (wantsTL && tlData) combined.push(...normalizeItems('Truckload', tlData));
-        if (wantsBATS && bzData) combined.push(...normalizeItems('Batz CRM', bzData));
+        function applyFiltersTo(items) {
+            return items.filter(it => {
+                if (fltStatus.value && (it.status || '').toLowerCase() !== fltStatus.value.toLowerCase()) return false;
+                if (fltOrigin.value && !(it.origin || '').toLowerCase().includes(fltOrigin.value.toLowerCase())) return false;
+                if (fltDestination.value && !(it.destination || '').toLowerCase().includes(fltDestination.value.toLowerCase())) return false;
+                return true;
+            });
+        }
 
-        allItems = combined;
-        const filtered = applyFiltersTo(allItems);
-        renderCards(sortItems(filtered, qs('#sortBy').value));
+        function sortItems(items, mode) {
+            const copy = items.slice();
+            if (mode === 'etaAsc') {
+                copy.sort((a, b) => (parseDateMaybe(a.eta)?.getTime() || Infinity) - (parseDateMaybe(b.eta)?.getTime() || Infinity));
+            } else if (mode === 'etaDesc') {
+                copy.sort((a, b) => (parseDateMaybe(b.eta)?.getTime() || -Infinity) - (parseDateMaybe(a.eta)?.getTime() || -Infinity));
+            } else if (mode === 'idAsc') {
+                copy.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+            } else if (mode === 'status') {
+                copy.sort((a, b) => String(a.status).localeCompare(String(b.status)));
+            }
+            return copy;
+        }
 
-      } catch (err) {
-        console.error(err);
-        setStatus([chip('Requests failed (CORS?)','err')]);
-        renderCards([]);
-      }
-    }
+        // ---------- Mock data ----------
+        function mockTruckload(q) {
+            return {
+                shipments: [
+                    { id: 'TL-1001', status: 'In Transit', origin: 'New York, NY', destination: 'Los Angeles, CA', eta: new Date(Date.now() + 3 * 86400000).toISOString() },
+                    { id: 'TL-1002', status: 'Out for Delivery', origin: 'Houston, TX', destination: 'Seattle, WA', eta: new Date(Date.now() + 1 * 86400000).toISOString() },
+                ]
+            };
+        }
+        function mockBatz(q) {
+            return {
+                shipments: [
+                    { id: 'BZ-12345', status: 'Delivered', origin: 'Chicago, IL', destination: 'Miami, FL', eta: new Date(Date.now() - 1 * 86400000).toISOString() },
+                    { id: 'BZ-98765', status: 'Processing', origin: 'Atlanta, GA', destination: 'Denver, CO', eta: new Date(Date.now() + 4 * 86400000).toISOString() },
+                ]
+            };
+        }
 
-    // ---------- Events ----------
-    qs('#applyFilters').addEventListener('click', () => {
-      const filtered = applyFiltersTo(allItems);
-      renderCards(sortItems(filtered, qs('#sortBy').value));
-    });
-    qs('#clearFilters').addEventListener('click', () => {
-      fltStatus.value = '';
-      fltOrigin.value = '';
-      fltDestination.value = '';
-      const filtered = applyFiltersTo(allItems);
-      renderCards(sortItems(filtered, qs('#sortBy').value));
-    });
-    qs('#sortBy').addEventListener('change', () => {
-      const filtered = applyFiltersTo(allItems);
-      renderCards(sortItems(filtered, qs('#sortBy').value));
-    });
+        // ---------- Fetchers (adjust endpoints to your sandbox) ----------
+        async function fetchTruckload(base, key, q, proxy) {
+            // Example: GET {base}/search?query=...
+            const url = new URL(base.replace(/\/$/, '') + '/search');
+            url.searchParams.set('query', q);
+            const target = withProxy(url.toString(), proxy);
+            const headers = new Headers({ 'Accept': 'application/json' });
+            if (key) headers.set('Authorization', asBearer(key));
+            const t0 = performance.now();
+            const res = await fetch(target, { headers, mode: 'cors' });
+            const t1 = performance.now();
+            if (!res.ok) throw new Error('Truckload HTTP ' + res.status);
+            const data = await res.json();
+            data._elapsed_ms = Math.round(t1 - t0);
+            return data;
+        }
 
-    qs('#clearQuery').addEventListener('click', () => { qInput.value = ''; renderCards([]); });
-    qInput.addEventListener('keypress', (e)=>{ if (e.key==='Enter'){ e.preventDefault(); runSearch(); } });
+        async function fetchBatz(base, key, q, proxy) {
+            // Example: GET {base}/search?q=...
+            const url = new URL(base.replace(/\/$/, '') + '/search');
+            url.searchParams.set('q', q);
+            const target = withProxy(url.toString(), proxy);
+            const headers = new Headers({ 'Accept': 'application/json' });
+            if (key) headers.set('Authorization', asBearer(key));
+            const t0 = performance.now();
+            const res = await fetch(target, { headers, mode: 'cors' });
+            const t1 = performance.now();
+            if (!res.ok) throw new Error('Batz HTTP ' + res.status);
+            const data = await res.json();
+            data._elapsed_ms = Math.round(t1 - t0);
+            return data;
+        }
 
-    // Settings modal
-    openSettings.addEventListener('click', () => {
-      const c = getCfg();
-      cfg_tlBase.value = c.tlBase;
-      cfg_tlKey.value = c.tlKey;
-      cfg_batsBase.value = c.batsBase;
-      cfg_batsKey.value = c.batsKey;
-      cfg_proxy.value = c.proxy;
-      cfg_mock.checked = !!c.mock;
-      settingsDlg.showModal();
-    });
-    btnSaveCfg.addEventListener('click', () => {
-      writeCfg({
-        tlBase: cfg_tlBase.value.trim(),
-        tlKey: cfg_tlKey.value.trim(),
-        batsBase: cfg_batsBase.value.trim(),
-        batsKey: cfg_batsKey.value.trim(),
-        proxy: cfg_proxy.value.trim(),
-        mock: !!cfg_mock.checked
-      });
-      settingsDlg.close();
-      runSearch();
-    });
-    btnClearCfg.addEventListener('click', (e) => {
-      e.preventDefault();
-      localStorage.removeItem(LS_KEY);
-      cfg_tlBase.value = cfg_tlKey.value = cfg_batsBase.value = cfg_batsKey.value = cfg_proxy.value = '';
-      cfg_mock.checked = false;
-    });
+        // ---------- Orchestration ----------
+        let allItems = []; // normalized, combined
 
-    // ---------- Init ----------
-    (function init(){
-      // Query prefill from ?q=
-      const q = getParam('q');
-      if (q) qInput.value = q;
+        async function runSearch() {
+            const cfg = getCfg();
+            const query = (qInput.value || '').trim();
+            if (!query) { renderCards([]); setStatus([chip('Enter a query', 'warn')]); return; }
 
-      // If nothing configured, default to Mock so UI works out-of-box
-      const c = getCfg();
-      if (!c.tlBase && !c.batsBase && !c.proxy && !c.tlKey && !c.batsKey){
-        writeCfg({ mock:true });
-      }
+            // Which sources
+            const wantsTL = srcTruckload.checked;
+            const wantsBATS = srcBatz.checked;
 
-      runSearch();
-    })();
-  </script>
+            // Status chips
+            const chips = [];
+            if (cfg.mock) {
+                chips.push(chip('Mock Mode', 'ok'));
+            } else if (cfg.proxy) {
+                chips.push(chip('Proxy', 'warn'));
+            } else {
+                chips.push(chip('Direct', 'warn')); // unknown CORS
+            }
+            setStatus(chips);
+
+            // Fetch
+            try {
+                let tlData = null, bzData = null;
+
+                if (cfg.mock) {
+                    if (wantsTL) tlData = mockTruckload(query);
+                    if (wantsBATS) bzData = mockBatz(query);
+                } else {
+                    const tasks = [];
+                    if (wantsTL) tasks.push(fetchTruckload(cfg.tlBase, cfg.tlKey, query, cfg.proxy).then(d => { tlData = d; chips.push(chip(`Truckload ${d._elapsed_ms}ms`, 'ok')); }).catch(e => { chips.push(chip('Truckload error', 'err')); console.error(e); }));
+                    if (wantsBATS) tasks.push(fetchBatz(cfg.batsBase, cfg.batsKey, query, cfg.proxy).then(d => { bzData = d; chips.push(chip(`Batz ${d._elapsed_ms}ms`, 'ok')); }).catch(e => { chips.push(chip('Batz error', 'err')); console.error(e); }));
+                    await Promise.all(tasks);
+                    setStatus(chips);
+                }
+
+                const combined = [];
+                if (wantsTL && tlData) combined.push(...normalizeItems('Truckload', tlData));
+                if (wantsBATS && bzData) combined.push(...normalizeItems('Batz CRM', bzData));
+
+                allItems = combined;
+                const filtered = applyFiltersTo(allItems);
+                renderCards(sortItems(filtered, qs('#sortBy').value));
+
+            } catch (err) {
+                console.error(err);
+                setStatus([chip('Requests failed (CORS?)', 'err')]);
+                renderCards([]);
+            }
+        }
+
+        // ---------- Events ----------
+        qs('#applyFilters').addEventListener('click', () => {
+            const filtered = applyFiltersTo(allItems);
+            renderCards(sortItems(filtered, qs('#sortBy').value));
+        });
+        qs('#clearFilters').addEventListener('click', () => {
+            fltStatus.value = '';
+            fltOrigin.value = '';
+            fltDestination.value = '';
+            const filtered = applyFiltersTo(allItems);
+            renderCards(sortItems(filtered, qs('#sortBy').value));
+        });
+        qs('#sortBy').addEventListener('change', () => {
+            const filtered = applyFiltersTo(allItems);
+            renderCards(sortItems(filtered, qs('#sortBy').value));
+        });
+
+        qs('#clearQuery').addEventListener('click', () => { qInput.value = ''; renderCards([]); });
+        qInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); runSearch(); } });
+
+        // Settings modal
+        openSettings.addEventListener('click', () => {
+            const c = getCfg();
+            cfg_tlBase.value = c.tlBase;
+            cfg_tlKey.value = c.tlKey;
+            cfg_batsBase.value = c.batsBase;
+            cfg_batsKey.value = c.batsKey;
+            cfg_proxy.value = c.proxy;
+            cfg_mock.checked = !!c.mock;
+            settingsDlg.showModal();
+        });
+        btnSaveCfg.addEventListener('click', () => {
+            writeCfg({
+                tlBase: cfg_tlBase.value.trim(),
+                tlKey: cfg_tlKey.value.trim(),
+                batsBase: cfg_batsBase.value.trim(),
+                batsKey: cfg_batsKey.value.trim(),
+                proxy: cfg_proxy.value.trim(),
+                mock: !!cfg_mock.checked
+            });
+            settingsDlg.close();
+            runSearch();
+        });
+        btnClearCfg.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem(LS_KEY);
+            cfg_tlBase.value = cfg_tlKey.value = cfg_batsBase.value = cfg_batsKey.value = cfg_proxy.value = '';
+            cfg_mock.checked = false;
+        });
+
+        // ---------- Init ----------
+        (function init() {
+            // Query prefill from ?q=
+            const q = getParam('q');
+            if (q) qInput.value = q;
+
+            // If nothing configured, default to Mock so UI works out-of-box
+            const c = getCfg();
+            if (!c.tlBase && !c.batsBase && !c.proxy && !c.tlKey && !c.batsKey) {
+                writeCfg({ mock: true });
+            }
+
+            runSearch();
+        })();
+    </script>
 </body>
+
 </html>
